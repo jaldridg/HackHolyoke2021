@@ -30,7 +30,7 @@ public class Main extends JComponent implements Runnable {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-
+                System.out.println("Mouse pressed");
             }
         });
         addKeyListener(new KeyAdapter() {
