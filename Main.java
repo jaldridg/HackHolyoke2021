@@ -6,6 +6,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
 import GUI.UpgradePanel;
+import Levels.BufferedImageLoader;
 
 public class Main extends JComponent implements Runnable {
 
@@ -65,6 +66,10 @@ public class Main extends JComponent implements Runnable {
         UpgradePanel upgradePanel = new UpgradePanel();        
 
         content.add(upgradePanel, BorderLayout.WEST);
+
+        // Loads the level, I'm not sure where this should go
+        BufferedImageLoader loader = new BufferedImageLoader();
+        level = loader.loadImage("/level.png"); 
 
         // Running the game
         long lastTime = System.nanoTime();
