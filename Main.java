@@ -14,11 +14,14 @@ public class Main extends JComponent implements Runnable {
     private boolean running = false;
     private Thread thread;
 
+    private PhysicsEngine pe;
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Main());
     }
 
     public Main() {
+        pe = new PhysicsEngine();
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -58,6 +61,8 @@ public class Main extends JComponent implements Runnable {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
+        JPanel gamePanel = new JPanel();
 
         UpgradePanel upgradePanel = new UpgradePanel();        
 
