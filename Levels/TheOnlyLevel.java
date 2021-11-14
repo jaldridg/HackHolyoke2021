@@ -2,16 +2,16 @@ package Levels;
 
 import javax.swing.JPanel;
 
+import Core.Player;
+
 import java.awt.*;
 public class TheOnlyLevel extends JPanel {
 
     Image levelImage;
 
     private int[][] blocks = LevelArray.BLOCKS;
-    
-    public TheOnlyLevel() {
 
-    }
+    private Player player = Player.getPlayer();
 
     public void paintComponent(Graphics g) {
         if (levelImage == null) {
@@ -31,6 +31,10 @@ public class TheOnlyLevel extends JPanel {
             }
             repaint();
         }
-        g.drawImage(levelImage, 0, 0, null);
+        Image newImage = levelImage;
+        Graphics2D graphics2D = (Graphics2D) newImage.getGraphics();
+        graphics2D.setColor(Color.RED);
+        graphics2D.fillRect((int)player.getX(), (int)player.getY(), 5, 5);
+        g.drawImage(newImage, 0, 0, null);
     }
 }

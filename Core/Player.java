@@ -6,8 +6,10 @@ public class Player {
 
     private static Player player;
     
-    private double x; // x-coordinate of the player
-    private double y; // y-coordinate of the player
+    private double x;
+    private double y;
+    private double vx;
+    private double vy;
     
     private int jumpHeight;
     private int jumpHeightLevel;
@@ -32,7 +34,7 @@ public class Player {
 
     public static Player getPlayer() {
         if (player == null) {
-            player = new Player(0, 0);
+            player = new Player(250, 250);
         }
         return player;
     }
@@ -74,7 +76,35 @@ public class Player {
         credits += delta;
     }
 
-    public void update() { // Update method
+    public double getX() {
+        return x;
+    }
 
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public double getVX() {
+        return vx;
+    }
+
+    public void setVX(double vx) {
+        this.vx = vx;
+    }
+
+    public double getVY() {
+        return vy;
+    }
+
+    public void setVY(double vy) {
+        this.vy = vy;
     }
 }

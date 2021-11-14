@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import GUI.UpgradePanel;
+import Levels.PhysicsEngine;
 import Levels.TheOnlyLevel;
 
 public class Main extends JComponent implements Runnable {
@@ -14,15 +15,15 @@ public class Main extends JComponent implements Runnable {
     private Image image;
     private Graphics2D graphics2D;
 
-    private boolean running = false;
-    private Thread thread;
-
+    private PhysicsEngine pe;
+    private TheOnlyLevel levelPanel;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Main());
     }
 
     public Main() {
+        pe = new PhysicsEngine();
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -37,14 +38,13 @@ public class Main extends JComponent implements Runnable {
         });
     }
 
-
-
     public void run() {
         JFrame frame = new JFrame("Game");
+
         Container content = frame.getContentPane();
 
-        content.setLayout(new BorderLayout());
         //content.add(new Main());
+        content.setLayout(new BorderLayout());
 
         frame.setLayout(new GridLayout(1, 0));
         frame.setSize(1000, 500);
@@ -54,68 +54,18 @@ public class Main extends JComponent implements Runnable {
 
         UpgradePanel upgradePanel = new UpgradePanel(); 
         
-        TheOnlyLevel levelPanel = new TheOnlyLevel();
+        levelPanel = new TheOnlyLevel();
 
         content.add(upgradePanel);
         content.add(levelPanel);
 
-        // Running the game
-        long lastTime = System.nanoTime();
-        final double numOfTicks = 60.0; // Limits us to 60 FPS
-        double numOfUpdates = 1000000000 / numOfTicks;
-        double deltaTime = 0;
-        int updates = 0;
-        int frames = 0;
-        long timer = System.currentTimeMillis();
-
-        /*this.start();
-        while(running) {
-            long currTime = System.nanoTime();
-            deltaTime += (currTime - lastTime) / numOfUpdates;
-            lastTime = currTime;
-            if (deltaTime >= 1) { // Only updates the game 60 times a second
-                update();
-                updates++;
-                deltaTime --;
-            }
-            render(); // Renders the game about 8 million times a second (depending on your computer)
-            frames++;
-
-            if(System.currentTimeMillis() - timer > 1000) { // After a second passes, reset the updates and frames
-                timer += 1000;
-                // System.out.println(updates + " Ticks, " + frames + " Frames");
-                updates = 0;
-                frames = 0;
-            }
-            // NOTE: Game currently doesn't stop unless you type crtl+C/cmd+C in the command line
-        }
-        this.stop();*/
+        pe.movePlayer();
+        repaint();
     }
-
-
-    private void update() { // Updates the game elements
-
-    }
-
-    private void render() { // Renders the game elements
-
-    }
-
-
-    public static void clearLevel() {} // Clears the level to create the next one
 
     public void paintComponent(Graphics g) {
-        if (image == null) {
-            image = createImage(getSize().width, getSize().height);
-            graphics2D = (Graphics2D) image.getGraphics();
-            graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            graphics2D.setPaint(Color.white);
-            graphics2D.fillRect(0, 0, getSize().width, getSize().height);
-            repaint();
-        }
-        g.drawImage(image, 0, 0, null);
+        levelPanel.paintComponent(g);
     }
-
 
     /*
     private synchronized void start() { // starts the game if it isn't started
@@ -137,5 +87,51 @@ public class Main extends JComponent implements Runnable {
         }
         System.exit(1);
     }
+
+    
+        // Running the game
+        long lastTime = System.nanoTime();
+        final double numOfTicks = 60.0; // Limits us to 60 FPS
+        double numOfUpdates = 1000000000 / numOfTicks;
+        double deltaTime = 0;
+        int updates = 0;
+        int frames = 0;
+        long timer = System.currentTimeMillis();
+
+        this.start();
+        while(running) {
+            long currTime = System.nanoTime();
+            deltaTime += (currTime - lastTime) / numOfUpdates;
+            lastTime = currTime;
+            if (deltaTime >= 1) { // Only updates the game 60 times a second
+                update();
+                updates++;
+                deltaTime --;
+            }
+            render(); // Renders the game about 8 million times a second (depending on your computer)
+            frames++;
+
+            if(System.currentTimeMillis() - timer > 1000) { // After a second passes, reset the updates and frames
+                timer += 1000;
+                // System.out.println(updates + " Ticks, " + frames + " Frames");
+                updates = 0;
+                frames = 0;
+            }
+            // NOTE: Game currently doesn't stop unless you type crtl+C/cmd+C in the command line
+        }
+        this.stop();
+    }
+
+    public static void clearLevel() {} // Clears the level to create the next one
+
+
+    private void update() { // Updates the game elements
+
+    }
+
+    private void render() { // Renders the game elements
+
+    }
+
     */
 }
