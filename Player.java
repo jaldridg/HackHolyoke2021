@@ -6,7 +6,7 @@ public class Player {
     private double x; // x-coordinate of the player
     private double y; // y-coordinate of the player
     
-    private BufferedImage player;
+    private BufferedImage player; // This can be changed to whatever Type the player sprite is
 
     public Player(double x, double y, Main game) {
         this.x = x;
@@ -18,6 +18,6 @@ public class Player {
     }
 
     public void render(Graphics g) { // Render method
-        g.drawImage(player, (int)x, (int)y, null);
+        g.drawImage(player, (int)x, (int)y, null); // Draws the player sprite at its new coordinates
     }
 }
