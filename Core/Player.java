@@ -77,8 +77,4 @@ public class Player {
     public void update() { // Update method
 
     }
-
-    public void render(Graphics g) { // Render method
-        // g.drawImage(player, (int)x, (int)y, null); // Draws the player sprite at its new coordinates
-    }
 }

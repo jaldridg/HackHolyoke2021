@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import GUI.UpgradePanel;
+import Levels.TheOnlyLevel;
 
 public class Main extends JComponent implements Runnable {
 
@@ -43,18 +44,20 @@ public class Main extends JComponent implements Runnable {
         Container content = frame.getContentPane();
 
         content.setLayout(new BorderLayout());
-        content.add(new Main(), BorderLayout.CENTER);
+        //content.add(new Main());
 
+        frame.setLayout(new GridLayout(1, 0));
         frame.setSize(1000, 500);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        JPanel gamePanel = new JPanel();
+        UpgradePanel upgradePanel = new UpgradePanel(); 
+        
+        TheOnlyLevel levelPanel = new TheOnlyLevel();
 
-        UpgradePanel upgradePanel = new UpgradePanel();        
-
-        content.add(upgradePanel, BorderLayout.WEST);
+        content.add(upgradePanel);
+        content.add(levelPanel);
 
         // Running the game
         long lastTime = System.nanoTime();
