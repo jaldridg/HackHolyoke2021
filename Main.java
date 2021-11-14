@@ -16,6 +16,9 @@ public class Main extends JComponent implements Runnable {
     private boolean running = false;
     private Thread thread;
 
+
+    private PhysicsEngine pe;
+
     private BufferedImage level = null;
 
     public static void main(String[] args) {
@@ -23,10 +26,17 @@ public class Main extends JComponent implements Runnable {
     }
 
     public Main() {
+        pe = new PhysicsEngine();
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
 
+            }
+        });
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                System.out.println(e.getKeyChar());
             }
         });
     }
@@ -62,6 +72,8 @@ public class Main extends JComponent implements Runnable {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+
+        JPanel gamePanel = new JPanel();
 
         UpgradePanel upgradePanel = new UpgradePanel();        
 
