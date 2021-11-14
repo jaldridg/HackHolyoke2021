@@ -1,3 +1,5 @@
+package Core;
+
 import java.awt.Container;
 
 import javax.swing.*;
@@ -15,17 +17,11 @@ public class Main extends JComponent implements Runnable {
     private boolean running = false;
     private Thread thread;
 
-
-    private PhysicsEngine pe;
-
-    private BufferedImage level = null;
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Main());
     }
 
     public Main() {
-        pe = new PhysicsEngine();
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -110,19 +106,6 @@ public class Main extends JComponent implements Runnable {
         }
         this.stop();*/
     }
-
-    private void update() { // Updates the game elements
-
-    }
-
-    private void render() { // Renders the game elements
-
-    }
-
-    public static void clearLevel() { // Clears the level to create the next one
-
-    }
-
 
     public void paintComponent(Graphics g) {
         if (image == null) {

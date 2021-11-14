@@ -1,4 +1,6 @@
 
+package Core;
+
 public class PhysicsEngine {
     
     private static final double GRAVITY = 9.8;

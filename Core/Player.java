@@ -1,49 +1,64 @@
-import java.util.ArrayList;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+package Core;
 
+import java.awt.Graphics;
 
 public class Player {
+
+    private static Player player;
     
     private double x; // x-coordinate of the player
     private double y; // y-coordinate of the player
     
-    private BufferedImage player; // This can be changed to whatever Type the player sprite is
-
     private int jumpHeight;
+    private int jumpHeightLevel;
+
     private int maxHealth;
+    private int maxHealthLevel;
+
     private int moveSpeed;
+    private int moveSpeedLevel;
 
     private int health;
-    private int credits;
-    
-    /*
-    * Index 0: Jump Height
-    * Index 1: Max Health
-    * Index 2: Move Speed
-    */
-    private ArrayList<Integer> upgradeLevels;
+    private int credits = 10;
 
     public Player(double x, double y) {
         this.x = x;
         this.y = y;
-        upgradeLevels = new ArrayList<Integer>();
     }
 
     public Player(double x, double y, Main game) {
 
     }
 
+    public static Player getPlayer() {
+        if (player == null) {
+            player = new Player(0, 0);
+        }
+        return player;
+    }
+
     public void changeJumpHeight(int delta) {
         jumpHeight += delta;
+    }
+
+    public void changeJumpHeightLevel(int delta) {
+        jumpHeightLevel += delta;
     }
 
     public void changeMaxHealth(int delta) {
         maxHealth += delta;
     }
 
+    public void changeMaxHealthLevel(int delta) {
+        maxHealthLevel += delta;
+    }
+
     public void changeMoveSpeed(int delta) {
         moveSpeed += delta;
+    }
+
+    public void changeMoveSpeedLevel(int delta) {
+        moveSpeedLevel += delta;
     }
 
     
@@ -64,6 +79,6 @@ public class Player {
     }
 
     public void render(Graphics g) { // Render method
-        g.drawImage(player, (int)x, (int)y, null); // Draws the player sprite at its new coordinates
+        // g.drawImage(player, (int)x, (int)y, null); // Draws the player sprite at its new coordinates
     }
 }
