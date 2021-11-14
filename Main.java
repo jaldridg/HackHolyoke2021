@@ -3,6 +3,7 @@ import java.awt.Container;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 
 import GUI.UpgradePanel;
 
@@ -14,7 +15,10 @@ public class Main extends JComponent implements Runnable {
     private boolean running = false;
     private Thread thread;
 
+
     private PhysicsEngine pe;
+
+    private BufferedImage level = null;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Main());
