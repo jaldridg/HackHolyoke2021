@@ -80,7 +80,7 @@ public class Main extends JComponent implements Runnable {
             deltaTime += (currTime - lastTime) / numOfUpdates;
             lastTime = currTime;
             if (deltaTime >= 1) {
-                tick();
+                update();
                 updates++;
                 deltaTime --;
             }
@@ -97,7 +97,7 @@ public class Main extends JComponent implements Runnable {
         this.stop();
     }
 
-    private void tick() { // Updates the game elements
+    private void update() { // Updates the game elements
 
     }
 
