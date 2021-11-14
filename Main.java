@@ -80,6 +80,8 @@ public class Main extends JComponent implements Runnable {
         content.add(upgradePanel, BorderLayout.WEST);
 
         // Loads the level, I'm not sure where this should go
+        // Each level is represented as a png, which gets read and built into a level
+        // Each pixel in level.png is 16x16 pixels in the game
         BufferedImageLoader loader = new BufferedImageLoader();
         level = loader.loadImage("/level.png"); 
 
