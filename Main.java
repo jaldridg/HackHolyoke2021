@@ -126,6 +126,26 @@ public class Main extends JComponent implements Runnable {
 
     }
 
+    // Loads a level based on the RGB values of an image
+    // Code referenced: https://youtu.be/1TFDOT1HiBo?t=602
+    private void loadImageLevel(BufferedImage image) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                int pixel = image.getRGB(x, y);
+                int red = (pixel >> 16) & 0xff;
+                int green = (pixel >> 8) & 0xff;
+                int blue = (pixel) & 0xff;
+
+                /* The rest of this is reading in the color values of each pixel and
+                 * assigning different objects to them on the canvas.
+                */
+            }
+        }
+    }
+
     public static void clearLevel() { // Clears the level to create the next one
 
     }
