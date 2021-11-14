@@ -5,7 +5,6 @@ import java.awt.Container;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
 
 import GUI.UpgradePanel;
 
@@ -17,6 +16,7 @@ public class Main extends JComponent implements Runnable {
     private boolean running = false;
     private Thread thread;
 
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Main());
     }
@@ -25,7 +25,7 @@ public class Main extends JComponent implements Runnable {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-
+                System.out.println("Mouse pressed");
             }
         });
         addKeyListener(new KeyAdapter() {
@@ -36,25 +36,7 @@ public class Main extends JComponent implements Runnable {
         });
     }
 
-    private synchronized void start() { // starts the game if it isn't started
-        if(running) return;
 
-        running = true;
-        thread = new Thread(this);
-        thread.start();
-    }
-
-    private synchronized void stop() {
-        if (!running) return;
-
-        running = false;
-        try{
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.exit(1);
-    }
 
     public void run() {
         JFrame frame = new JFrame("Game");
@@ -107,6 +89,18 @@ public class Main extends JComponent implements Runnable {
         this.stop();*/
     }
 
+
+    private void update() { // Updates the game elements
+
+    }
+
+    private void render() { // Renders the game elements
+
+    }
+
+
+    public static void clearLevel() {} // Clears the level to create the next one
+
     public void paintComponent(Graphics g) {
         if (image == null) {
             image = createImage(getSize().width, getSize().height);
@@ -118,4 +112,27 @@ public class Main extends JComponent implements Runnable {
         }
         g.drawImage(image, 0, 0, null);
     }
+
+
+    /*
+    private synchronized void start() { // starts the game if it isn't started
+        if(running) return;
+
+        running = true;
+        thread = new Thread(this);
+        thread.start();
+    }
+
+    private synchronized void stop() {
+        if (!running) return;
+
+        running = false;
+        try{
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.exit(1);
+    }
+    */
 }
