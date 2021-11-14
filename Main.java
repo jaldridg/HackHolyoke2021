@@ -8,6 +8,8 @@ public class Main extends JComponent implements Runnable {
 
     private Image image;
     private Graphics2D graphics2D;
+    private boolean running = false;
+    private Thread thread;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Main());
@@ -20,6 +22,26 @@ public class Main extends JComponent implements Runnable {
 
             }
         });
+    }
+
+    private synchronized void start() { // starts the game if it isn't started
+        if(running) return;
+
+        running = true;
+        thread = new Thread(this);
+        thread.start();
+    }
+
+    private synchronized void stop() {
+        if (!running) return;
+
+        running = false;
+        try{
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.exit(1);
     }
 
     public void run() {
@@ -42,6 +64,45 @@ public class Main extends JComponent implements Runnable {
         upgradesPanel.add(jumpUpgradeLabel);
 
         content.add(upgradesPanel, BorderLayout.WEST);
+
+        // Running the game
+        long lastTime = System.nanoTime();
+        final double numOfTicks = 60.0;
+        double numOfUpdates = 1000000000 / numOfTicks;
+        double deltaTime = 0;
+        int updates = 0;
+        int frames = 0;
+        long timer = System.currentTimeMillis();
+
+        this.start();
+        while(running) {
+            long currTime = System.nanoTime();
+            deltaTime += (currTime - lastTime) / numOfUpdates;
+            lastTime = currTime;
+            if (deltaTime >= 1) {
+                tick();
+                updates++;
+                deltaTime --;
+            }
+            render();
+            frames++;
+
+            if(System.currentTimeMillis() - timer > 1000) {
+                timer += 1000;
+                System.out.println(updates + " Ticks, " + frames + " Frames");
+                updates = 0;
+                frames = 0;
+            }
+        }
+        this.stop();
+    }
+
+    private void tick() { // Updates the game elements
+
+    }
+
+    private void render() { // Renders the game elements
+
     }
 
     public void paintConponent(Graphics g) {
