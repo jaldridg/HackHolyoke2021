@@ -104,6 +104,11 @@ public class Main extends JComponent implements Runnable {
 
     }
 
+    public static void clearLevel() { // Clears the level to create the next one
+
+    }
+
+
     public void paintComponent(Graphics g) {
         if (image == null) {
             image = createImage(getSize().width, getSize().height);
