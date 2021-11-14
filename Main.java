@@ -102,10 +102,11 @@ public class Main extends JComponent implements Runnable {
 
             if(System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                System.out.println(updates + " Ticks, " + frames + " Frames");
+                // System.out.println(updates + " Ticks, " + frames + " Frames");
                 updates = 0;
                 frames = 0;
             }
+            // NOTE: Game currently doesn't stop unless you type crtl+C in the command line
         }
         this.stop();
     }
