@@ -87,7 +87,7 @@ public class Main extends JComponent implements Runnable {
         int frames = 0;
         long timer = System.currentTimeMillis();
 
-        this.start();
+        /*this.start();
         while(running) {
             long currTime = System.nanoTime();
             deltaTime += (currTime - lastTime) / numOfUpdates;
@@ -108,7 +108,7 @@ public class Main extends JComponent implements Runnable {
             }
             // NOTE: Game currently doesn't stop unless you type crtl+C/cmd+C in the command line
         }
-        this.stop();
+        this.stop();*/
     }
 
     private void update() { // Updates the game elements
