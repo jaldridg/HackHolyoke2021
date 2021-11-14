@@ -5,8 +5,6 @@ public class PhysicsEngine {
 
     private final int GROUND_LEVEL = 50;
 
-    Controller controller = new Controller();
-
     public void movePlayer() {
 
         preventPlayerIntersections();
