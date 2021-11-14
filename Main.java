@@ -3,6 +3,7 @@ import java.awt.Container;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Main extends JComponent implements Runnable {
 
@@ -10,12 +11,14 @@ public class Main extends JComponent implements Runnable {
     private Graphics2D graphics2D;
     private boolean running = false;
     private Thread thread;
+    private ArrayList<UpgradeBox> upgradeBoxes;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Main());
     }
 
     public Main() {
+        upgradeBoxes = new ArrayList<UpgradeBox>();
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -57,11 +60,21 @@ public class Main extends JComponent implements Runnable {
         frame.setVisible(true);
 
         JPanel upgradesPanel = new JPanel();
-        // upgradesPanel.setLayout(new GridLayout(1, 1));
         upgradesPanel.setBackground(Color.LIGHT_GRAY);
+        upgradesPanel.setSize(new Dimension(200, upgradeBoxes.size() * 50));
+        upgradesPanel.setLayout(new GridLayout(0, 1));
 
-        JLabel jumpUpgradeLabel = new JLabel("Jump Upgrade");
-        upgradesPanel.add(jumpUpgradeLabel);
+        UpgradeBox jumpHeightUpgradeBox = new UpgradeBox("Jump Height");
+        upgradeBoxes.add(jumpHeightUpgradeBox);
+
+        UpgradeBox healthUpgradeBox = new UpgradeBox("Health");
+        upgradeBoxes.add(healthUpgradeBox);
+
+        // Add upgrade boxes to upgrade panel
+        for (int i = 0; i < upgradeBoxes.size(); i++) {
+            upgradesPanel.add(upgradeBoxes.get(i));
+        }
+        
 
         content.add(upgradesPanel, BorderLayout.WEST);
 
@@ -105,7 +118,7 @@ public class Main extends JComponent implements Runnable {
 
     }
 
-    public void paintConponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         if (image == null) {
             image = createImage(getSize().width, getSize().height);
             graphics2D = (Graphics2D) image.getGraphics();
