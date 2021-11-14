@@ -1,5 +1,8 @@
+package GUI;
+
 import javax.swing.*;
 import java.awt.event.*;
+
 public class UpgradeBox extends JPanel {
     private JLabel upgradeLabel;
     private JButton addButton; 
@@ -20,7 +23,7 @@ public class UpgradeBox extends JPanel {
     };
 
     public UpgradeBox(String upgradeName) {
-        upgradeLabel = new JLabel(upgradeName + " Upgrade");
+        upgradeLabel = new JLabel(upgradeName);
 
         addButton = new JButton("+");
         addButton.addActionListener(actionListener);

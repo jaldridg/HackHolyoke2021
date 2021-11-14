@@ -3,20 +3,19 @@ import java.awt.Container;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
+
+import GUI.UpgradePanel;
 
 public class Main extends JComponent implements Runnable {
 
     private Image image;
     private Graphics2D graphics2D;
-    private ArrayList<UpgradeBox> upgradeBoxes;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Main());
     }
 
     public Main() {
-        upgradeBoxes = new ArrayList<UpgradeBox>();
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -37,24 +36,9 @@ public class Main extends JComponent implements Runnable {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        JPanel upgradesPanel = new JPanel();
-        upgradesPanel.setBackground(Color.LIGHT_GRAY);
-        upgradesPanel.setSize(new Dimension(200, upgradeBoxes.size() * 50));
-        upgradesPanel.setLayout(new GridLayout(0, 1));
+        UpgradePanel upgradePanel = new UpgradePanel();        
 
-        UpgradeBox jumpHeightUpgradeBox = new UpgradeBox("Jump Height");
-        upgradeBoxes.add(jumpHeightUpgradeBox);
-
-        UpgradeBox healthUpgradeBox = new UpgradeBox("Health");
-        upgradeBoxes.add(healthUpgradeBox);
-
-        // Add upgrade boxes to upgrade panel
-        for (int i = 0; i < upgradeBoxes.size(); i++) {
-            upgradesPanel.add(upgradeBoxes.get(i));
-        }
-        
-
-        content.add(upgradesPanel, BorderLayout.WEST);
+        content.add(upgradePanel, BorderLayout.WEST);
     }
 
     public void paintComponent(Graphics g) {
